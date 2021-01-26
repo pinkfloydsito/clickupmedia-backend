@@ -31,6 +31,6 @@ RUN yarn install --check-files
 
 ADD . $APP_HOME
 
-EXPOSE 3000
+EXPOSE 9000
 
-ENTRYPOINT bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b 0.0.0.0 -p 3000"
+ENTRYPOINT bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b 0.0.0.0 -p 9000"
