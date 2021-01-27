@@ -5,7 +5,7 @@ default: &default
   username:
   password:
   # If you using docker the host should be "db"
-  host: localhost
+  host: db
   port: 5432
 
 development:
