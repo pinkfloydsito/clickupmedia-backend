@@ -10,7 +10,10 @@ class Api::V1::StoresController < ActionController::API
   end
 
   def create
-    @store = Store.new(store_params)
+    @store = Store.new(store_params.except(:products_attributes))
+    params[:products_attributes].each do |i|
+      @store.products << Product.find(i[:id])
+    end
     if @store.save
       render json: @store
     else
