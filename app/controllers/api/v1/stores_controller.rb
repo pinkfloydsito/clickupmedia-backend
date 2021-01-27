@@ -21,7 +21,12 @@ class Api::V1::StoresController < ActionController::API
   def update
     @store = Store.find(params[:id])
     if @store
+      @store.products.clear
+      params[:products_attributes].each do |i|
+        @store.products << Product.find(i[:id])
+      end
       @store.update(store_params)
+      @store.save!
       render json: @store
     else
       render json: { error: @store.errors }, status: 400
@@ -39,7 +44,7 @@ class Api::V1::StoresController < ActionController::API
   end
 
   def store_params
-    params.require(:store).permit(:name, :street, :zip_code, :country, :city, :number)
+    params.require(:store).permit!
   end
 end
 
