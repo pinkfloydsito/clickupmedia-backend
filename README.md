@@ -14,7 +14,8 @@
   ```
 3. Generate a secret key for the app by running `docker-compose run --rm --entrypoint="" web rake secret`, copy it and add it in your environment variables.
     1. Override the files application.yml (pasting the secretkey previously generated inside the APP_SECRET env variable) and database.yml
-5. Run `docker-compose run --rm --entrypoint="" web rails db:create db:migrate`.
+4. Run `docker-compose run --rm --entrypoint="" web rails db:create db:migrate`.
    . (Optional) If you want to deny access to the database from outside of the `docker-compose` network, remove the `ports` key in the `docker-compose.yml` from the `db` service.
-7. Run the application with `docker-compose up`.
-8. You can now try your REST services!
+5. Run the application with `docker-compose up`.
+6. You can now try your REST services!
+7. Launch the raw testing of the api that are available in the clickupmedia.json `Use insomnia to open them`
