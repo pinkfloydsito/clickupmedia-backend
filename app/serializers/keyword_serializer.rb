@@ -13,6 +13,6 @@
 #  index_keywords_on_category_id  (category_id)
 #
 class KeywordSerializer < ActiveModel::Serializer
-  attributes :id, :category_id
+  attributes :id, :category_id, :name
   belongs_to :category
 end

@@ -10,8 +10,10 @@ class Api::V1::CategoriesController < ActionController::API
   end
 
   def create
-    @category = Category.new(category_params)
-    print(category_params)
+    @category = Category.new(category_params.except(:keywords_attributes))
+    params[:keywords_attributes].each do |i|
+      @category.keywords << Keyword.create_or_find_by(name: i[:id])
+    end
     if @category.save
       render json: @category
     else
@@ -22,7 +24,11 @@ class Api::V1::CategoriesController < ActionController::API
   def update
     @category = Category.find(params[:id])
     if @category
-      @category.update(category_params)
+      @category.keywords.destroy_all
+      @category.update(category_params.except(:keywords_attributes))
+      params[:keywords_attributes].each do |i|
+        @category.keywords << Keyword.create_or_find_by(name: i[:id])
+      end
       render json: @category
     else
       render json: { error: @category.errors }, status: 400
@@ -43,5 +49,3 @@ class Api::V1::CategoriesController < ActionController::API
     params.require(:category).permit!
   end
 end
-
-
