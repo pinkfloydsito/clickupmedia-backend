@@ -36,7 +36,7 @@ class Api::V1::KeywordsController < ActionController::API
       @keyword.destroy
       render json: { message: 'Keyword successfully deleted' }, status: 200
     else
-      render error: { error: 'Unable to delete keyword' }, status: 400
+      render json: { error: @keyword.errors }, status: 400
     end
   end
 

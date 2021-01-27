@@ -10,13 +10,15 @@
 #  updated_at :datetime         not null
 #  city       :string
 #  country    :string
+#  number     :string
 #
 class Store < ApplicationRecord
   has_and_belongs_to_many :products
   accepts_nested_attributes_for :products, reject_if: :all_blank
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
   validates :street, presence: true
   validates :zip_code, presence: true
   validates :city, presence: true
+  validates :number, presence: true
   validates :country, presence: true
 end

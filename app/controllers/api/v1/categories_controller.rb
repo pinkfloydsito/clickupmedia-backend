@@ -1,8 +1,7 @@
 class Api::V1::CategoriesController < ActionController::API
   def index
     @categories = Category.all()
-    render json: @categories,
-           include:[:keywords]
+    render json: @categories
   end
 
   def show
@@ -16,7 +15,7 @@ class Api::V1::CategoriesController < ActionController::API
     if @category.save
       render json: @category
     else
-      render error: { error: 'Unable to create category' }, status: 400
+      render json: { error: @category.errors }, status: 400
     end
   end
 
@@ -26,7 +25,7 @@ class Api::V1::CategoriesController < ActionController::API
       @category.update(category_params)
       render json: @category
     else
-      render error: { error: 'Unable to update category' }, status: 400
+      render json: { error: @category.errors }, status: 400
     end
   end
 
@@ -36,12 +35,12 @@ class Api::V1::CategoriesController < ActionController::API
       @category.destroy
       render json: { message: 'Category successfully deleted' }, status: 200
     else
-      render error: { error: 'Unable to delete category' }, status: 400
+      render json: { error: 'Unable to delete category' }, status: 400
     end
   end
 
   def category_params
-    params.require(:category).permit(:name, keyword_attributes: [:name] )
+    params.require(:category).permit!
   end
 end
 

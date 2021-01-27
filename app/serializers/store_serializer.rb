@@ -10,8 +10,9 @@
 #  updated_at :datetime         not null
 #  city       :string
 #  country    :string
+#  number     :string
 #
 class StoreSerializer < ActiveModel::Serializer
-  attributes :id, :name, :street, :city, :country
+  attributes :id, :name, :street, :city, :country, :zip_code, :number
   has_many :products
 end

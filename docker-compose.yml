@@ -2,6 +2,8 @@ version: '3.0'
 
 services:
   web:
+    stdin_open: true
+    tty: true 
     build: .
     entrypoint: >
       bash -c "

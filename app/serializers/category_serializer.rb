@@ -8,6 +8,6 @@
 #  updated_at :datetime         not null
 #
 class CategorySerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :keywords
   has_many :keywords
 end

@@ -1,7 +1,7 @@
 class Api::V1::ProductsController < ActionController::API
   def index
     @products = Product.all()
-    render json: @products
+    render json: @products, include: :category
   end
 
   def show
@@ -14,7 +14,7 @@ class Api::V1::ProductsController < ActionController::API
     if @product.save
       render json: @product
     else
-      render error: { error: 'Unable to create product' }, status: 400
+      render json: { error: @product.errors }, status: 400
     end
   end
 
@@ -24,7 +24,7 @@ class Api::V1::ProductsController < ActionController::API
       @product.update(product_params)
       render json: @product
     else
-      render error: { error: 'Unable to update product' }, status: 400
+      render json: { error: @product.errors }, status: 400
     end
   end
 
@@ -34,13 +34,11 @@ class Api::V1::ProductsController < ActionController::API
       @product.destroy
       render json: { message: 'Product successfully deleted' }, status: 200
     else
-      render error: { error: 'Unable to delete product' }, status: 400
+      render json: { error: @product.errors }, status: 400
     end
   end
 
   def product_params
-    params.require(:product).permit(:name)
+    params.require(:product).permit(:name, :category_id, :size, :color, :price, :category)
   end
 end
-
-

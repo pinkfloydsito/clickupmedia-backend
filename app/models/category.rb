@@ -8,9 +8,9 @@
 #  updated_at :datetime         not null
 #
 class Category < ApplicationRecord
-  has_many :keywords
+  has_many :keywords, inverse_of: :category
   has_many :products
 
-  accepts_nested_attributes_for :keywords, reject_if: :all_blank
+  accepts_nested_attributes_for :keywords
   accepts_nested_attributes_for :products, reject_if: :all_blank
 end

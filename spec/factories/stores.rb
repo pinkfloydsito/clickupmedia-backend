@@ -10,6 +10,7 @@
 #  updated_at :datetime         not null
 #  city       :string
 #  country    :string
+#  number     :string
 #
 FactoryBot.define do
   factory :store do

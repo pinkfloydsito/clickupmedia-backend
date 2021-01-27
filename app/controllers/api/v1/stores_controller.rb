@@ -14,7 +14,7 @@ class Api::V1::StoresController < ActionController::API
     if @store.save
       render json: @store
     else
-      render error: { error: 'Unable to create store' }, status: 400
+      render json: { error: @store.errors }, status: 400
     end
   end
 
@@ -24,7 +24,7 @@ class Api::V1::StoresController < ActionController::API
       @store.update(store_params)
       render json: @store
     else
-      render error: { error: 'Unable to update store' }, status: 400
+      render json: { error: @store.errors }, status: 400
     end
   end
 
@@ -39,7 +39,7 @@ class Api::V1::StoresController < ActionController::API
   end
 
   def store_params
-    params.require(:store).permit(:name)
+    params.require(:store).permit(:name, :street, :zip_code, :country, :city, :number)
   end
 end
 

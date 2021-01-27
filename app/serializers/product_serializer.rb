@@ -16,5 +16,6 @@
 #  index_products_on_category_id  (category_id)
 #
 class ProductSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name, :color, :size, :price, :category_id, :category
+  has_many :stores
 end
